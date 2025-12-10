@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>George Maidhof | Personal Website</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(135deg, #5fbf77, #2c7a4d);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      z-index: 1000;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      position: relative;
+      padding: 0.3rem 0;
+      transition: all 0.3s ease;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 2px;
+      width: 100%;
+      background-color: #d4f5e9;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    nav a:hover {
+      transform: scale(1.05);
+      color: #d4f5e9;
+    }
+
+    nav a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    nav a.active {
+      color: #fffae1;
+    }
+
+    header {
+      height: 100vh;
+      background: linear-gradient(135deg, #5fbf77, #2c7a4d);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 3px solid white;
+      animation: typing 3s steps(30, end), blink 0.8s step-end infinite;
+      max-width: 90%;
+    }
+
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+
+      to {
+        width: 100%;
+      }
+    }
+
+    @keyframes blink {
+      50% {
+        border-color: transparent;
+      }
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 2s ease-out forwards;
+      animation-delay: 2s;
+    }
+
+    .scroll-down {
+      margin-top: 40px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      animation: bounce 2s infinite;
+      transition: transform 0.3s;
+    }
+
+    .scroll-down:hover {
+      transform: scale(1.2);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(8px);
+      }
+    }
+
+    section {
+      padding: 80px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .about-scrapbook {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .scrapbook-entry {
+      display: flex;
+      align-items: center;
+      margin: 40px 0;
+      max-width: 1000px;
+      padding: 20px;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease-out;
+    }
+
+    .scrapbook-entry.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scrapbook-entry img {
+      width: 200px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      flex-shrink: 0;
+    }
+
+    .scrapbook-entry p {
+      flex: 1;
+      margin: 0 30px;
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+
+    .scrapbook-entry .left {
+      order: -1;
+    }
+
+    .scrapbook-entry .right {
+      order: 1;
+    }
+
+    .handles-logos {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 30px;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .handles-logos.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .handles-logos img {
+      width: 140px;
+      height: auto;
+      border-radius: 16px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .handles-logos a:hover img {
+      transform: scale(1.15) rotate(2deg);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .hobby-button {
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .hobby-button img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #ccc;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .hobby-button:hover img {
+      border-color: #007acc;
+      transform: scale(1.05);
+    }
+
+    .hobby-button span {
+      display: block;
+      margin-top: 5px;
+      font-size: 0.9em;
+    }
+
+    .hobby-detail {
+      display: none;
+      margin-top: 10px;
+      padding: 10px;
+      background: #f5f5f5;
+      border-left: 3px solid #007acc;
+      font-style: italic;
+      color: #444;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(20, 20, 20, 0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background-color: #fdf8f0;
+      padding: 40px;
+      border-radius: 16px;
+      width: 95%;
+      max-width: 1000px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      position: relative;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .modal .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #444;
+      cursor: pointer;
+    }
+
+    .handles-logos {
+      position: relative;
+      z-index: 1 !important;
+    }
+
+    .category-pyramid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .category-row {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .category {
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      width: 250px;
+    }
+
+    .category:hover {
+      transform: scale(1.05);
+      filter: brightness(1.1);
+    }
+
+    .category img {
+      width: 250px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .category span {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    #about p {
+      font-size: 1.4em;
+      line-height: 1.6;
+    }
+  </style>
+
+<body>
+  <!-- Sticky Nav -->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="projects.html">Projects</a>
+    <a id="resume-link" href="GeorgeMaidhof Resume.pdf" download>Resume</a>
+  </nav>
+
+  <script>
+    document.getElementById('resume-link').addEventListener('click', function (event) {
+      event.preventDefault();
+      const pdfUrl = this.href;
+      window.open(pdfUrl, '_blank');
+      const anchor = document.createElement('a');
+      anchor.href = pdfUrl;
+      anchor.download = 'GeorgeMaidhof Resume.pdf';
+      anchor.click();
+    });
+
+    function openModal(id) {
+      document.getElementById(id).classList.add('show');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('show');
+    }
+
+    window.addEventListener('scroll', () => {
+      document.querySelectorAll('.scrapbook-entry').forEach(entry => {
+        const rect = entry.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          entry.classList.add('visible');
+        }
+      });
+
+      const logos = document.querySelector('.handles-logos');
+      const logosRect = logos.getBoundingClientRect();
+      if (logosRect.top < window.innerHeight - 100) {
+        logos.classList.add('visible');
+      }
+    });
+  </script>
+
+  <header id="home">
+    <h1>Hello, I'm George Maidhof</h1>
+    <p>Aspiring Logical Design Engineer In Tech!</p>
+    <div class="scroll-down" onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' });">
+      ↓ Scroll Down
+    </div>
+  </header>
+
+  <section id="about" class="about-scrapbook">
+    <h2>About Me</h2>
+
+    <div class="scrapbook-entry">
+      <img src="index/touchdown.jpg" class="left" alt="George at Cornell">
+      <p>
+        My name is George Maidhof, a Masters of Engineering student at Cornell University.
+        I am studying Electrical and Computer Engineering with a Computer Science Minor and
+        distinction in Engineering Leadership from the Selander Center. Some activies I do on campus include Project
+        Team Nexus, mentor for the Engineering Leadership Program, Graduate Researcher in the Zhang Research Group,
+        and Residential Advisor for Barbara McClintock Hall.
+      </p>
+    </div>
+
+    <div class="scrapbook-entry">
+      <img src="index/presentation.jpg" class="right" alt="Career Goals">
+      <p>
+        In my career I want to focus on the digital design of hardware including FPGAs or ASICs.
+        Long term, I aim to take a management position where I can lead a team toward a unified
+        goal while helping those around me reach their dreams. To succeed in this field, I must
+        first gain the necessary technical experience.
+      </p>
+    </div>
+
+    <div class="scrapbook-entry">
+      <img src="index/me.jpg" class="left" alt="Post Graduation Goals">
+      <p>
+        When I start my professional career, I want to continue living by the values I define who I am which include:
+        Hard work, unification, giving, trustworthiness, and positivity. I aim to continue growing and meeting new
+        people with each any every day. I want to also make the world a most positivie place and that starts with giving
+        back to the community and I aim to do this through my work and personal life.
+      </p>
+    </div>
+
+    <div class="scrapbook-entry">
+      <img src="index/hiking.jpg" class="right" alt="George's Hobbies">
+      <p>
+        To operate at my fullest, I stay mentally and physically active through various hobbies. By doing things such as
+        running, swimming, watching and playing basketball, building projects in my free time, and speedrunning video
+        games, and spending time with family and friends, I am able to stay focused and continue growing each and every
+        day.
+      </p>
+    </div>
+
+    <h2 style="text-align: center; margin-top: 20px;">Hobbies</h2>
+    <div class="category-pyramid">
+      <div class="category-row top-row">
+        <div class="category" onclick="openModal('running-modal')">
+          <img src="index/running.jpg" alt="Running">
+          <span>Running</span>
+        </div>
+        <div class="category" onclick="openModal('swimming-modal')">
+          <img src="index/swimming.jpg" alt="Swimming">
+          <span>Swimming</span>
+        </div>
+        <div class="category" onclick="openModal('basketball-modal')">
+          <img src="index/basketball.jpg" alt="Basketball">
+          <span>Basketball</span>
+        </div>
+      </div>
+
+      <div class="category-row bottom-row">
+        <div class="category" onclick="openModal('electronics-modal')">
+          <img src="index/electronics.jpg" alt="Electronics">
+          <span>Electronics</span>
+        </div>
+        <div class="category" onclick="openModal('speedrunning-modal')">
+          <img src="index/speedrunning.png" alt="Speedrunning">
+          <span>Speedrunning</span>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="running-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('running-modal')">&times;</span>
+        <h1>Running</h1>
+        <p>Throughout my childhood, I always did distance running ranging from 5ks to 15ks. During High School, I did
+          both Cross Country and Spring Track. In Track, I focused on mid-distance, specifically the mile. During my
+          senior year of college, I have been getting back into running and building up my stamina. This is a hobby I
+          have found to be very relaxing and is something I hope to continue to stay fit mentally and physically. Linked
+          <a href="https://ny.milesplit.com/athletes/5601254-george-maidhof" target="_blank"> here</a> is my Milesplit
+          from my High School years. Below is a table of some of my best times!
+        </p>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+          <thead>
+            <tr>
+              <th style="border: 1px solid #ddd; padding: 8px;">Distance</th>
+              <th style="border: 1px solid #ddd; padding: 8px;">Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="border: 1px solid #ddd; padding: 8px;">800m</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">2:07</td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #ddd; padding: 8px;">1600m</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">4:42</td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #ddd; padding: 8px;">5000m</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">16:48</td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #ddd; padding: 8px;">15k</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">1:06:35</td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #ddd; padding: 8px;">Half Marathon</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">1:35:56</td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #ddd; padding: 8px;">Marathon</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="swimming-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('swimming-modal')">&times;</span>
+        <h1>Swimming</h1>
+        <p>I started swimming at a young age and did competitive swimming. I eventually took a gap from swimming and
+          came back to swim on the High School Swim Team. I did a lot of different events but some of the main ones I
+          did during this time were the 200 IM, 100 Breaststroke, 100 Free, and 500 Free. I have been getting back into
+          swimming as of recent as it is a great full body workout and I eventually want to get back into shape to do an
+          Iron Man!</p>
+      </div>
+    </div>
+
+    <div id="basketball-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('basketball-modal')">&times;</span>
+        <h1>Basketball</h1>
+        <p>I recently got into basketball during 2022. I enjoyed watching the New York Knicks and my brothers and I
+          wanted to also choose a team in the West to follow. I had chosen the Los Angles Lakers as my team and I have
+          grown very attached to them. I keep track of a lot of the games during the regular season and this has been
+          the main sport I have been following. I love to also play pick-up basketball and have been working on my
+          shooting form along with drives. I aim to some day to be able to dunk on a regulated size rim.
+        </p>
+      </div>
+    </div>
+
+    <div id="electronics-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('electronics-modal')">&times;</span>
+        <h1>Building Electronics</h1>
+        <p>
+          Since my 10th grade, I have found the realm of embedded electronics, robotics, and computer systems very
+          interesting! While in college, I have gained in-depth experience with microcontrollers (Arduinos) and SBCs
+          (Raspberry Pis). Some of the projects I have worked on in my free time and for classes that help feed this
+          passion of mine include:
+        </p>
+        <br>
+        <ul>
+          <li>Autonomous Beach Cleaning Robot</li>
+          <li>Smartwatch (Texting, Step Count, Heart Rate, Voice Messaging, Weather)</li>
+          <li>Topographic Sandbox with XBox 360 Kinect and Raspberry Pi</li>
+          <li>RC Drone</li>
+          <li>RC Car</li>
+          <li>Alarm Clocks</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="speedrunning-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('speedrunning-modal')">&times;</span>
+        <h1>Speedrunning Games</h1>
+        <p>The idea of speedrunning video games was a concept I had picked up during COVID, specifically for 3D Mario
+          Games including Mario 64, Mario Sunshine and Mario Galaxy. This hobby is something I limit myself to do during
+          breaks. Below are some of my times for each game and the categories I have done:</p>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+          <thead>
+            <tr>
+              <th style="border: 1px solid #ddd; padding: 8px;">Game</th>
+              <th style="border: 1px solid #ddd; padding: 8px;">Category</th>
+              <th style="border: 1px solid #ddd; padding: 8px;">Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;" rowspan="3">Super Mario 64</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">16 Star</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">21:09.74</td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #ddd; padding: 8px;">70 Star</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">1:09:40.27</td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #ddd; padding: 8px;">120 Star</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">XX:XX</td>
+            </tr>
+
+            <tr>
+              <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;" rowspan="2">Super Mario Sunshine</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">Any % (45 Stars)</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">1:45:08.90</td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #ddd; padding: 8px;">120 Shine</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">XX:XX</td>
+            </tr>
+
+            <tr>
+              <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;" rowspan="2">Super Mario Galaxy</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">Any % (70 Stars)</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">3:52:23.40</td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #ddd; padding: 8px;">120 Star</td>
+              <td style="border: 1px solid #ddd; padding: 8px;">9:40:02.68</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="handles">
+    <h2>Find Me Online</h2>
+    <div class="handles-logos">
+      <a href="https://github.com/GeorgeM58" target="_blank">
+        <img src="index/github.jpg" alt="GitHub" />
+      </a>
+      <a href="https://www.linkedin.com/in/george-maidhof/" target="_blank">
+        <img src="index/linkedin.png" alt="LinkedIn" />
+      </a>
+      <a href="https://www.strava.com/athletes/57573053" target="_blank">
+        <img src="index/strava.png" alt="Strava" />
+      </a>
+      <a href="mailto:gpm58@gmail.com" target="_blank">
+        <img src="index/gmail.png" alt="Gmail" />
+      </a>
+    </div>
+  </section>
+
+</body>
+
+</html>

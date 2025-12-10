@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects - George Maidhof</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fdfdfd;
+      color: #333;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(135deg, #5fbf77, #2c7a4d);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      z-index: 1000;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      animation: slideDown 0.6s ease-in-out;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #d4f5e9;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .container {
+      padding: 80px 20px;
+      max-width: 1000px;
+      margin: auto;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .container h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 10px;
+      text-align: left;
+    }
+
+    .resume-section {
+      margin-bottom: 40px;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      border: 2px solid #2c7a4d;
+
+    }
+
+    .resume-section:hover {
+      transform: scale(1.02);
+    }
+
+    .resume-section h3 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: #2c7a4d;
+    }
+
+    .resume-section p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    .project-details {
+      display: none;
+      margin-top: 15px;
+      animation: fadeIn 0.5s ease forwards;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+
+    .project {
+      margin-bottom: 20px;
+    }
+
+    .project h4 {
+      margin: 10px 0 5px;
+      font-size: 1.2rem;
+      color: #2c7a4d;
+    }
+
+    .project p {
+      margin: 0 0 10px;
+    }
+
+
+    .toggle-button {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 8px 16px;
+      background: #2c7a4d;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .toggle-button:hover {
+      background: #25623c;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .project img,
+    .work-image {
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      margin: 10px 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .skills span {
+      display: inline-block;
+      background: #2c7a4d;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      white-space: nowrap;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Sticky Nav -->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="projects.html">Projects</a>
+    <a id="resume-link" href="GeorgeMaidhof Resume.pdf" download>Resume</a>
+  </nav>
+
+  <script>
+    document.getElementById('resume-link').addEventListener('click', function (event) {
+      event.preventDefault();
+      const pdfUrl = this.href;
+
+      window.open(pdfUrl, '_blank');
+
+      const anchor = document.createElement('a');
+      anchor.href = pdfUrl;
+      anchor.download = 'GeorgeMaidhof Resume.pdf';
+      anchor.click();
+    });
+
+    function toggleDetails(id) {
+      const section = document.getElementById(id);
+      section.style.display = section.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+
+  <div class="container">
+    <h2>Project Portfolio</h2>
+
+    <div class="resume-section">
+      <h3>Research</h3>
+      <p>Dive into my Research in Compilers, FPGAs Optimization, Data Interpretation, and Verification</p>
+      <button class="toggle-button" onclick="toggleDetails('research-details')">View Details</button>
+      <div class="project-details" id="research-details">
+        <div class="project">
+          <h4>MEng Project: ML Model for FPGA Optimization During Allocation</h4>
+          <div class="skills">
+            <span>Machine Learning</span>
+            <span>FPGA Design</span>
+            <span>Hardware Optimization</span>
+          </div>
+          <img src="images/research.png">
+          <p>For my Masters of Engineering Project, I decided to continue working within the Zhang Research Group
+            studying the applications of Software and Hardware in the realm of FPGA Design during allocation. This
+            research project is letting me take a step towards leading my own project in a complicated realm of hardware
+            design while also exploring and developing necessary skills in Machine Learning applications for hardware
+            development. </p>
+          <h4>Undergraduate Research: MLIR FPGA Compiler</h4>
+          <div class="skills">
+            <span>Verification</span>
+            <span>FPGA Design</span>
+            <span>Hardware Optimization</span>
+          </div>
+          <p>When starting my Undergraduate research in the Zhang Research Group, my introduction project was the
+            development of a Graduate Tutorial Manuscript for ECE 6775: High-Level Synthesis, <a
+              href="https://www.csl.cornell.edu/courses/ece6775/pdf/hls_setup_guide.pdf" target="_blank"> seen here</a>.
+            After gaining a solid background on the MLIR Compiler, I was able to assist in the development of our own
+            MLIR Compiler. My job in the Computer Systems Labratory (CSL) for the next three semesters would revolve
+            around testing and developing the compiler through intrduction of new features, tracking data through its
+            evolution and creating test benches that exposes possible errors along with serving as a baseline to compare
+            to existing compilers.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="resume-section">
+      <h3>Project Teams</h3>
+      <p>Engineering and Non-Engineering Teams I Worked on to Solve Real-World Problems</p>
+      <button class="toggle-button" onclick="toggleDetails('teams-details')">View Details</button>
+      <div class="project-details" id="teams-details">
+        <div class="project">
+          <h4>Project Team Nexus</h4>
+          <div class="skills">
+            <span>Leadership</span>
+            <span>PCB Design</span>
+            <span>Sensor Data</span>
+          </div>
+          <img src="images/nexus.jpg">
+          <p>Project Team Nexus originally a club on campus when I joined during my Freshman Spring in 2022. Our goal is
+            to create a autonomous robot capable of microplastic filtration on the shores of beaches. When joining
+            Nexus, I had joined the Electrical Subteam, where I learned in great detail of technical skills with coding
+            in Python, data abstraction from sensors, and the development of a PCB. After taking ownership on the team
+            and growing into my role, I was chosen to be the Full Team Lead for Nexus during my Sophomore Spring and
+            Junior year. I became lead during the transistion period from a club to a offical Cornell Project Team. This
+            experience paired with the Cornell Engineering Leadership Program fostered my skills in leading engineering
+            teams along with gaining skills in project management, team dynamics, and becoming knowledgeable in other
+            subteams. Upon completing my tenure as Team Lead, I transistioned into a mentorship role for the new members
+            of Electrical Subteam. Our project is near completion for our first prototype!
+            <a href="https://www.cornellnexus.com/" target="_blank">See our Website!</a>.
+          </p>
+          <h4>Engineering Leadership Program: CUBeeHappy</h4>
+          <div class="skills">
+            <span>Leadership</span>
+            <span>Difficult Conversations</span>
+            <span>Event Planning</span>
+          </div>
+          <img src="images/CUBeeHappy.png">
+          <p>At Cornell, the Selander Center offers the Cornell Engineering Leadership Program. This program focuses on
+            two major things, the development of the person taking charge and their ability to control the teams they
+            work in to work as effectivily as possible. In the ELP, I had the opportunity to work with Morgan, Erik and
+            Ruth to create an activity called CUBeeHappy which our main goal was to find ways to spark joy on the
+            Cornell Campus through small and large acts of kindness. Some ways our group approached this was through
+            handing out snowcones, cookie fundraising, along with our big event which consisted of hosting a comedy show
+            on campus with over 200 attendees. This show invited numerous comedy groups, along with offering open mic
+            for students who were interested. CUBeeHappy taught me the skills of finding the stakes of members, planning
+            large events, handling assumptions.</p>
+          <h4>Cornell Animal Health Hackathon</h4>
+          <div class="skills">
+            <span>Hackathon</span>
+            <span>3D Printing</span>
+            <span>Presentation</span>
+          </div>
+          <img src="images/AnimalHealth.jpg">
+          <p>The Cornell Animal Health Hackathon is the first Hackathon I have participated in! This Hackathon lasted 3
+            days and its purpose was to innovate a solution to a problem in the Animal Health Industry including
+            pigmented animals, shortages in vet profession, specialty case back log, high volume testing, and more. I
+            had originally participated in this event as it was suggested from my NBA 6650 class: Strategic Management
+            of Technology, however this was one of my favorite experiences at Cornell.
+            <br>
+            Our team, <a href="https://georgem58.github.io/Uplift/" target="_blank">Up Lift</a>, focused on a solution
+            to
+            to assist in animal recovery without the physical demands of
+            caretaking, address the shortage of veterinary staff, and explore ways to make it more accessible for
+            consumers. Our idea was similar to that of a Hoyer lift that would support a dog's entire weight either in
+            ACL recovery or post-anesthesia to provide range of motion and mobility for the dog if it wants to move,
+            while also providing simplicity for caretakers to maneuver these animals without strain.
+            <br>
+            Though our idea did not move onto the final round, this experience taught me so much about the animal health
+            by working with students in different dicsciplines, and how to work in a team to innovate a solution
+            through brainstorming, prototyping, and pitching. I also gained a deeper appreciation for the design process
+            of a product and tailoring it to a particular audiance and their needs!
+          </p>
+          <h4>Cornell Digital Agriculture Hackathon</h4>
+          <div class="skills">
+            <span>Hackathon</span>
+            <span>Presentation</span>
+            <span>Teamwork</span>
+          </div>
+          <img src="images/DigitalAg.jpg">
+          <p>
+            For the Cornell Digital Agriculture Hackathon, our group had came in wanting to create a project that
+            revolved around water sensors and data collection. This idea was very vague which eventually took time for
+            us to narrow down and find a solution. Our group, "Hydrolytics", focused on a solution to assist farmers
+            in solving regional issues of high salinity and low pH in their soil. By providing farmers with real time
+            data through monitoring their water througb a sensor called "FarmFlow", along with the ability simply access
+            their data, analyize trends in their regional area, and provide them with actionable insights and
+            reccomendations through our machine learning model, we aim to help farmers make informed decisions about
+            crop health.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="resume-section">
+      <h3>Class Projects</h3>
+      <p>Projects I have worked on in my classes within Electrical and Computer Engineering</p>
+      <button class="toggle-button" onclick="toggleDetails('class-details')">View Details</button>
+      <div class="project-details" id="class-details">
+        <div class="project">
+          <h4>RC Car for ECE 3140</h4>
+          <div class="skills">
+            <span>RF Communication</span>
+            <span>Bluetooth</span>
+            <span>Microcontroller</span>
+          </div>
+          <img src="images/rc_car.jpg" alt="RC Car" />
+          <p>My partner and I designed and programmed a Bluetooth-controlled RC car using an Arduino FRDM Board. Our
+            design takes input from a Bluetooth controller (in our case a XBox Controller) and the controls are mapped
+            on our laptop through Pygame. We then use the Arduino as a receiver between the computer and FRDM board
+            where controls are mapped to GPIO functionality and PWM to our motor wheels. By using H-Bridges, we are able
+            to go in multiple directions. See our
+            website here <a href="https://pages.github.coecis.cornell.edu/ece3140-sp2023/gpm58-pis7/"
+              target="_blank">GitHub Repo</a>.</p>
+        </div>
+        <div class="project">
+          <h4>Sand Box Topographic Map for ECE 5725</h4>
+          <div class="skills">
+            <span>Raspberry Pi</span>
+            <span>Language: C</span>
+            <span>Embedded Systems</span>
+          </div>
+          <img src="images/sandbox_map.jpg" alt="Sandbox Map" />
+          <p>Built an topographic sandbox with real-time topographic projection using an XBox 360 1414 Kinect, a
+            Projector, and a Raspberry
+            Pi. By getting depth values in the sand and filtering out values not in range, we normalize data points and
+            perform a linear mapping of RBG colors. We made use of a Linux open source library, OpenKinect to abstract
+            the values from the Kinect. This library also makes use of all four cores making use all all effective
+            hardware, letting us run nearly in real-time. See our
+            website here <a href="https://georgem58.github.io/ECE5725_Final_Project_Website/" target=" _blank">GitHub
+              Repo</a>.</p>
+        </div>
+        <!-- </div>
+        <div class="project">
+          <h4>Smart Watch for ECE 5730</h4>
+          <img src="images/smartwatch.jpg" alt="Smartwatch" />
+          <p>Created a custom smartwatch prototype with real-time data tracking and Wi-Fi synchronization.</p>
+        </div> -->
+        <div class="project">
+          <h4>8-Bit ALU in Cadence Verisium for ECE 4760</h4>
+          <div class="skills">
+            <span>Cadence Virtuoso</span>
+            <span>Routing</span>
+            <span>VLSI</span>
+          </div>
+          <img src="images/alu.jpg" alt="8-bit ALU" />
+          <p>Designed an 8-bit arithmetic logic unit for VLSI using Cadence on the gate level and performed routing. We
+            then verified the ALU worked through creating a testbench. By using knowledge we have learned in our
+            Computer Archectiure and Microelectronics class, we interact with the boundary between digital hardware and
+            circuitry. Using Cadence, we were able to explore the delays from our circuit and find to route and connect
+            each hardware level component. </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="resume-section">
+      <h3>Work Experience</h3>
+      <p>Professional Work Experience in the Field of Electrical and Computer Engineering</p>
+      <button class="toggle-button" onclick="toggleDetails('work-details')">View Details</button>
+      <div class="project-details" id="work-details">
+        <div class="project">
+          <h4>Logical Design and Digital Verification Engineer Intern</h4>
+          <div class="skills">
+            <span>SystemVerilog</span>
+            <span>Technical Writing</span>
+            <span>UVM Verification</span>
+          </div>
+          <img class="work-image" src="projects/marvell.png" alt="Internship" />
+          <p>
+            At <a href="https://www.marvell.com/" target="_blank">Marvell</a>, my job as a Digital Verification
+            Engineer
+            Intern was to create Universal Verification
+            Methodology (UVM) to verify pre-silicon designs in SystemVerilog. This included writing technical
+            doucmentation for users and customers, creating testing enviorments, debugging through waveform analysis,
+            regressions, coverage, and quality analysis.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleDetails(id) {
+      const el = document.getElementById(id);
+      el.style.display = el.style.display === "block" ? "none" : "block";
+    }
+  </script>
+</body>
+
+</html>
